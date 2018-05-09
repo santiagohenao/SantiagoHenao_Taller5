@@ -11,7 +11,7 @@ using namespace std;
 double T=40.;
 double rho=10.;
 double L=100.;
-double tf=30.;
+double tf=200.;
 
 double dt=0.1; // Elección arbitraria
 

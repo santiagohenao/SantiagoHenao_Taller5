@@ -5,4 +5,4 @@ cuerda : cuerda.o
 cuerda.o : cuerda.cpp window.hpp
 	g++ -c cuerda.cpp
 clean :
-	rm -f cuerda *.o *.out *.dat *.mp4
+	rm -f *.o *.out *.dat *.mp4
