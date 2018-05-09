@@ -8,7 +8,7 @@ rc('animation', html='html5')
 import matplotlib.animation as animation
 FFwriter = animation.FFMpegWriter()
 Writer = animation.writers['ffmpeg']
-writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+writer = Writer(fps=150, metadata=dict(artist='Me'), bitrate=1800)
 
 
 data=np.genfromtxt("Result.dat")    # Lee los datos
@@ -27,5 +27,5 @@ def animate(i): # Por cada frame avanzará una fila en los datos
     sc.set_offsets(np.c_[x,y])
 
 
-sim = animation.FuncAnimation(fig, animate, frames=len(data[:,0]), interval=20, repeat=True) # Anima todos los frames, a intervalos de 50 ms
+sim = animation.FuncAnimation(fig, animate, frames=len(data[:,0]), interval=500, repeat=True) # Anima todos los frames, a intervalos de 50 ms
 sim.save('cuerda.mp4', writer=writer) # guarda la animación
