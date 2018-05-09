@@ -11,9 +11,9 @@ using namespace std;
 double T=40.;
 double rho=10.;
 double L=100.;
-double tf=200.;
+double tf=30.;
 
-double dt=0.02; // Elección arbitraria
+double dt=0.1; // Elección arbitraria
 
 int main()
 {
@@ -21,9 +21,7 @@ int main()
     int n=1; // partición inicial
     while(L/n>c*dt){n++;}  // Si la partición es aún mayor que el límite inferior de dx, aumentar la partición
 
-    //n=500;
-
-    n=n/3; // para no forzar la simulación
+    n=n/3;
 
     double dx = L/(n); // Compensar el efecto de pasada del while restando uno
 
@@ -59,7 +57,7 @@ int main()
         uf[i]=-up[i]+2*(1-alpha)*u[i]+alpha*(u[i+1]+u[i-1]);
     }
 
-    // Acutaliza los arreglos en el orden correspondiente
+    // Actualiza
     for(int i=0;i<n;i++)
     {
         up[i]=u[i];
@@ -69,6 +67,39 @@ int main()
         u[i]=uf[i];
     }
 
-    #include "window.hpp"
+    ofstream result("Result.dat");
+
+
+    for(double t=0.;t<=tf;t+=dt)
+    {
+        // Machaca las condiciones inciales
+        u[0]=0;u[n-1]=0;
+        up[0]=0;up[n-1]=0;
+        uf[0]=0;uf[n-1]=0;
+
+        // Solución de la ecuación diferencial
+        for(int i=1;i<n-1;i++)
+        {
+            uf[i]=-up[i]+2*(1-alpha)*u[i]+alpha*(u[i+1]+u[i-1]);
+        }
+
+        // Actualiza
+        for(int i=0;i<n;i++)
+        {
+            up[i]=u[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            u[i]=uf[i];
+        }
+
+        // Escribe los datos
+        for(int i=0;i<n;i++)
+        {
+            result << u[i] << " ";
+        }
+        result << endl;
+
+    }
 
 }
