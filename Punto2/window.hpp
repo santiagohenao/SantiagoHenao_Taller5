@@ -2,7 +2,7 @@ sf::CircleShape dots[n];
 
 for(int i=0;i<n;i++)
 {
-    dots[i]=sf::CircleShape(1);
+    dots[i]=sf::CircleShape(1.3);
     dots[i].setPosition(i*dx*10,(-u[i]*150)+150);
 }
 
@@ -26,16 +26,26 @@ while (window.isOpen())
 
         // Cálculos
 
-    for(int j=0;j<10;j++)
+    for(int j=0;j<60;j++)
     {
+        u[0]=0;u[n-1]=0;
+        up[0]=0;up[n-1]=0;
+        uf[0]=0;uf[n-1]=0;
+
+
         for(int i=1;i<n-1;i++)
         {
-            u[i]=-up[i]+2*(1-alpha)*u[i]+alpha*(u[i+1]+u[i-1]);
-            u[0]=0;
+            uf[i]=-up[i]+2*(1-alpha)*u[i]+alpha*(u[i+1]+u[i-1]);
         }
+
+
         for(int i=0;i<n;i++)
         {
             up[i]=u[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            u[i]=uf[i];
         }
     }
 
