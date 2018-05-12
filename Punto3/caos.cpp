@@ -8,17 +8,26 @@
 
 using namespace std;
 
-// constante de las ecuaciones, constante de resolución temporal, tiempo máximo
-#define epsilon 10e-03
-#define step 10e-3
-#define t_max 10
+//constante de resolución temporal
+double step=6*10e-4;
+
+// constante de las ecuaciones, tiempo máximo
+#define epsilon 0.8
+#define t_max 3000
 
 // condiciones iniciales
 double q1=sqrt(2.)/4.;
-double q2=sqrt(2.)/4.;
+double q2=-sqrt(2.)/4.;
 
-double p1=0;
-double p2=0;
+
+double p1=0.;
+double p2=0.;
+
+double q1f;
+double q2f;
+
+double p1f;
+double p2f;
 
 
 // Método de Runge-Kutta de cuarto orden para una función general f
@@ -70,22 +79,25 @@ int main()
 {
     // Runge-Kutta
 
-    ofstream result("Result.dat");
+    ofstream result("result.dat");
 
     int mu=0;
 
     for(double t=0.;t<t_max;t+=step)
     {
         //cout << t << "\t" << p1 << endl;
-        p1+=(k1(p1_dot,step,t,q1,q2)+2*k2(p1_dot,step,t,q1,q2)+2*k3(p1_dot,step,t,q1,q2)+k4(p1_dot,step,t,q1,q2))/6.;
-        p2+=(k1(p2_dot,step,t,q1,q2)+2*k2(p2_dot,step,t,q1,q2)+2*k3(p2_dot,step,t,q1,q2)+k4(p2_dot,step,t,q1,q2))/6.;
+        q1f=q1+(k1(q1_dot,step,t,p1,p2)+2*k2(q1_dot,step,t,p1,p2)+2*k3(q1_dot,step,t,p1,p2)+k4(q1_dot,step,t,p1,p2))/6.;
+        q2f=q2+(k1(q2_dot,step,t,p1,p2)+2*k2(q2_dot,step,t,p1,p2)+2*k3(q2_dot,step,t,p1,p2)+k4(q2_dot,step,t,p1,p2))/6.;
 
-        q1+=(k1(q1_dot,step,t,p1,p2)+2*k2(q1_dot,step,t,p1,p2)+2*k3(q1_dot,step,t,p1,p2)+k4(q1_dot,step,t,p1,p2))/6.;
-        q2+=(k1(q2_dot,step,t,p1,p2)+2*k2(q2_dot,step,t,p1,p2)+2*k3(q2_dot,step,t,p1,p2)+k4(q2_dot,step,t,p1,p2))/6.;
+        p1f=p1+(k1(p1_dot,step,t,q1,q2)+2*k2(p1_dot,step,t,q1,q2)+2*k3(p1_dot,step,t,q1,q2)+k4(p1_dot,step,t,q1,q2))/6.;
+        p2f=p2+(k1(p2_dot,step,t,q1,q2)+2*k2(p2_dot,step,t,q1,q2)+2*k3(p2_dot,step,t,q1,q2)+k4(p2_dot,step,t,q1,q2))/6.;
 
-        if(mu==10)
+
+        q1=q1f;q2=q2f;p1=p1f;p2=p2f;
+
+        if(mu==100)
         {
-            result << t << "\t" << q1 << "\t" << q2 << endl;
+            result << t << "\t" << q1 << "\t" << q2 << "\t" << p1 << "\t" << p2 << endl;
             mu=0;
         }
         mu++;

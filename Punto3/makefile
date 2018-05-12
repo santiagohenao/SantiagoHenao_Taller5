@@ -1,7 +1,13 @@
-all : a.out
-	./a.out
-a.out : main.cpp
-	g++ main.cpp
+all : result.png
+
+result.png : result.dat
+	python3 graph.py
+
+result.dat : caos
+	./caos
+
+caos : caos.cpp
+	g++ caos.cpp -o caos
 
 clean :
-	rm *.dat *.out
+	rm -f *.dat *.out result.png
