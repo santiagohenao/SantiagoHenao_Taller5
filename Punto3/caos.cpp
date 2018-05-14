@@ -95,7 +95,7 @@ int main()
 
         q1=q1f;q2=q2f;p1=p1f;p2=p2f;
 
-        if(mu==100)
+        if(mu==10)
         {
             result << t << "\t" << q1 << "\t" << q2 << "\t" << p1 << "\t" << p2 << endl;
             mu=0;
