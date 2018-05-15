@@ -92,10 +92,10 @@ int main()
         p1f=p1+(k1(p1_dot,step,t,q1,q2)+2*k2(p1_dot,step,t,q1,q2)+2*k3(p1_dot,step,t,q1,q2)+k4(p1_dot,step,t,q1,q2))/6.;
         p2f=p2+(k1(p2_dot,step,t,q1,q2)+2*k2(p2_dot,step,t,q1,q2)+2*k3(p2_dot,step,t,q1,q2)+k4(p2_dot,step,t,q1,q2))/6.;
 
-
+        // actualizar valores
         q1=q1f;q2=q2f;p1=p1f;p2=p2f;
 
-        if(mu==10)
+        if(mu==10) // Exportar uno de cada diez datos.
         {
             result << t << "\t" << q1 << "\t" << q2 << "\t" << p1 << "\t" << p2 << endl;
             mu=0;

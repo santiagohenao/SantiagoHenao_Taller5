@@ -26,7 +26,7 @@ x=q1[0]    # inizializa el primer frame con la primera serie de datos
 y=q2[0]
 plt.xlabel("q1",fontsize=25)
 plt.ylabel("q2",fontsize=25)
-plt.scatter(q1,q2,c=colors,s=0.1,alpha=0.2)
+plt.scatter(q1,q2,c=colors,s=0.1,alpha=0.2) # pone la gráfica de color de fondo
 
 sc = ax.scatter(x,y,s=8,c='w')  # Inicializa el sactter propiamente dicho
 
